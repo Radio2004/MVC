@@ -1,0 +1,13 @@
+{
+    "name": "mvc/project",
+    "description": "example mvc pattern",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mvc\\Project\\": "src/"
+        }
+    },
+    "require": {
+        "twig/twig": "^3.8"
+    }
+}
