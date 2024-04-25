@@ -4,9 +4,8 @@ session_start();
 use Core\System;
 
 
-include_once('init.php');
-include_once('autoload.php');
-include_once('vendor/autoload.php');
+include_once ('init.php');
+
 
 $left = '';
 /**
@@ -18,13 +17,12 @@ $cname = '';
 $badUrl = BASE_URL . 'index.php';
 
 if (strpos($_SERVER['REQUEST_URI'], $badUrl) === 0) {
-    $cname = 'Errors/Error404';
+    $cname = 'errors/Error';
 } else {
-    $routes = Routes::getInstance();
-
+    $routes = include ('routes.php');
     $url = $_GET['mvcsystemurl'] ?? '';
 
-    $routerRes = $routes->getController($url);
+    $routerRes = System::parseUrl($url, $routes);
     $cname = $routerRes['controller'];
     $params = $routerRes['params'] ?? [];
 
@@ -39,4 +37,3 @@ $path = "Controller\\$cname";
 $path = str_replace("/", '\\', $path);
 $controller = new $path();
 echo $controller->render();
-

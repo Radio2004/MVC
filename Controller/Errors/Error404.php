@@ -4,7 +4,7 @@
  * @website: https://profstep.com
  **/
 
-// Title in Error404.php
+// Title in Index.php
 // Content Path
 
 namespace Controller\Errors;
@@ -21,6 +21,7 @@ class Error404 extends CoreController {
 
     public function render() : string {
         $this->content = System::template(static::CONTENT_PATH, []);
-        return Includer::includeHTML(static::INCLUDE_PATH, $this);
+        $mainHtml = Includer::includeHTML(static::INCLUDE_PATH, $this);
+        return $mainHtml;
     }
 }

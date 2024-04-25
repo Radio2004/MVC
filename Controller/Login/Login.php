@@ -47,6 +47,7 @@ class Login extends CoreController {
         self::submit();
         // Set Content 
         $this->content = System::template(static::CONTENT_PATH, []);
-        return Includer::includeHTML(static::INCLUDE_PATH, $this);
+        $mainHtml = Includer::includeHTML(static::INCLUDE_PATH, $this);
+        return $mainHtml;
     }
 }

@@ -85,5 +85,15 @@ use Core\Language;
         &copy; MVC site
     </div>
 </footer>
+<div class='position-fixed d-center bg-subbtle-opacity inset-0'>
+    <div class="wrapper-command-line">
+        <h2>
+            Administration Terminal
+        </h2>
+        <form method="post" class='form-command'>
+            <textarea name="command-line" class="command-line" cols="100" rows="10"></textarea>
+        </form>
+    </div>
+</div>
 </body>
 </html>

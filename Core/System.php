@@ -22,8 +22,6 @@ class System
             'params' => []
         ];
 
-
-
         foreach($routes as $route){
             $matches = [];
 

@@ -163,3 +163,34 @@ ul>li {
 .to-contacts {
 	color: #000;
 }
+
+.inset-0 {
+	inset: 0;
+}
+
+.d-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.bg-subbtle-opacity {
+	background-color: #c0c0c07a;
+}
+
+.bg-dark-opacity {
+	background-color: #221f1f8a;
+}
+
+.command-line {
+	max-width: 1000px;
+	max-height: 300px;
+	border: 0;
+	background-color: #000;
+	color: #fff;
+}
+
+.wrapper-command-line {
+	padding: 2rem;
+	background-color: #fff;
+}

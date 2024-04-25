@@ -1,9 +1,10 @@
 <?php
 
-use Core\System;
-class Routes
-{
-    const CONTROLLERS = [
+return (function(){
+    $intGT0 = '[1-9]+\d*';
+    //$text = '[0-9aA-zZ_-]+';
+
+    return [
         [
             'regex' => '/^$/',
             'controller' => 'Messages/MessageIndex'
@@ -18,7 +19,7 @@ class Routes
         ],
         [
             'regex' => '/^contacts\/?$/',
-            'controller' => 'Contacts/Contact'
+            'controller' => 'Contacts/Contacts'
         ],
         [
             'regex' => '/^register\/?$/',
@@ -29,43 +30,20 @@ class Routes
             'controller' => 'Login/Login'
         ],
         [
+            'regex' => '/^command\/?$/',
+            'controller' => 'Command/Command'
+        ],
+        [
             //message/n/edit
-            'regex' => "/^message\/([1-9]+\d*)\/edit\/?$/",
+            'regex' => "/^message\/($intGT0)\/edit\/?$/",
             'controller' => 'message/EditMessage',
             'params' => ['mid' => 1]
         ],
         [
             //message/n/delete
-            'regex' => "/^message\/([1-9]+\d*)\/delete\/?$/",
+            'regex' => "/^message\/($intGT0)\/delete\/?$/",
             'controller' => 'message/DeleteMessage',
             'params' => ['mid' => 1]
         ]
     ];
-    private string $controller = 'Error/Error404';
-    private static array $instances = [];
-    private function __construct() { }
-    private function __clone() { }
-
-    /**
-     * @throws Exception
-     */
-    public function __wakeup()
-    {
-        throw new Exception("Cannot serialize a singleton.");
-    }
-
-    public static function getInstance(): Routes
-    {
-        $class = static::class;
-        if (!isset(self::$instances[$class])) {
-            self::$instances[$class] = new static();
-        }
-
-        return self::$instances[$class];
-    }
-
-    public function getController(string $url): array
-    {
-        return System::parseUrl($url, static::CONTROLLERS);
-    }
-}
+})();

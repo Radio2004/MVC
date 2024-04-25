@@ -1,6 +1,6 @@
 RewriteEngine on
 
-# Rewrite all other URLs to Error404.php?[URL]
+# Rewrite all other URLs to Index.php?[URL]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule .* index.php?mvcsystemurl=$0 [QSA]
 
