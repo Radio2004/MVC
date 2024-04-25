@@ -61,6 +61,9 @@ use Core\Language;
             <li class="nav-item">
                 <a class="nav-link" href="<?=BASE_URL?>messages/add"><?= Language::__('Add')?></a>
             </li>
+            <li>
+                <a class="nav-link" href="<?=BASE_URL?>censorship"><?= Language::__('Censorship') ?></a>
+            </li>
             <?php endif ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?=BASE_URL?>contacts"><?= Language::__('Contacts')?></a>
@@ -85,7 +88,7 @@ use Core\Language;
         &copy; MVC site
     </div>
 </footer>
-<div class='position-fixed d-center bg-subbtle-opacity inset-0'>
+<div class='position-fixed d-center bg-subbtle-opacity inset-0 d-none'>
     <div class="wrapper-command-line">
         <h2>
             Administration Terminal

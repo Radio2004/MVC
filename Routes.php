@@ -34,6 +34,10 @@ return (function(){
             'controller' => 'Command/Command'
         ],
         [
+            'regex' => '/^censorship\/?$/',
+            'controller' => 'Censorship/Censorship'
+        ],
+        [
             //message/n/edit
             'regex' => "/^message\/($intGT0)\/edit\/?$/",
             'controller' => 'message/EditMessage',
