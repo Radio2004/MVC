@@ -61,6 +61,8 @@ use Core\Language;
             <li class="nav-item">
                 <a class="nav-link" href="<?=BASE_URL?>messages/add"><?= Language::__('Add')?></a>
             </li>
+            <?php endif ?>
+            <?php if ($controller->getBoolRole([1])): ?>
             <li>
                 <a class="nav-link" href="<?=BASE_URL?>censorship"><?= Language::__('Censorship') ?></a>
             </li>
@@ -93,8 +95,11 @@ use Core\Language;
         <h2>
             Administration Terminal
         </h2>
+        <pre class="bg-black m-0 result-command">
+
+        </pre>
         <form method="post" class='form-command'>
-            <textarea name="command-line" class="command-line" cols="100" rows="10"></textarea>
+            <textarea name="command-line" class="command-line" cols="100"></textarea>
         </form>
     </div>
 </div>

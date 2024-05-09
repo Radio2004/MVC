@@ -66,6 +66,8 @@ document.addEventListener('keydown', function (e) {
 
 const testCommand = document.querySelector('.command-line');
 
+let resultCommand = document.querySelector('.result-command');
+
 let lastCommand = '';
 
 testCommand.addEventListener('keydown', function (e) {
@@ -86,10 +88,11 @@ testCommand.addEventListener('keydown', function (e) {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 const response = xhr.responseText;
                 if (lastCommand.toLowerCase() == 'clear' && response == '') {
-                    e.target.value = response;
+                    resultCommand.textContent = response;
                     return;
                 }
-                e.target.value += '\n' + response;
+                resultCommand.textContent += '\n' + response;
+                resultCommand.scrollTop = resultCommand.scrollHeight;
             }
         };
 

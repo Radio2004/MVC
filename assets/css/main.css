@@ -164,8 +164,19 @@ ul>li {
 	color: #000;
 }
 
+.bg-black {
+	background-color: #000000;
+	color: #ffffff;
+}
+
 .inset-0 {
 	inset: 0;
+}
+
+.result-command {
+	min-height: 140px;
+	overflow-y: auto;
+	max-height: 700px;
 }
 
 .d-center {
@@ -186,11 +197,32 @@ ul>li {
 	max-width: 1000px;
 	max-height: 300px;
 	border: 0;
-	background-color: #000;
+	background-color: inherit;
 	color: #fff;
+	outline: none;
+	resize: none;
+}
+
+.form-command {
+	background-color: #000000;
 }
 
 .wrapper-command-line {
 	padding: 2rem;
 	background-color: #fff;
+}
+
+.censorship-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.wrapper-censorship {
+	box-shadow: 0 0 11px 0;
+	padding: 10px;
+	gap: 1rem;
+}
+
+.censorship-word {
+	font-size: 30px;
 }

@@ -1,12 +1,14 @@
 <?php
 
+namespace Container;
+
 interface ContainerCensoreAction
 {
-    public function getAll($connect) : array;
+    public function getAll() : array;
 
-    public function add($connect) : bool;
+    public function add() : bool;
 
-    public function rename($connect, $id) : bool;
+    public function rename($id) : bool;
 
-    public function delete($connect, $id) : bool;
+    public function delete($id) : bool;
 }

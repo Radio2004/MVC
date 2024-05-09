@@ -9,6 +9,7 @@ use Core\CoreController;
 use Core\Includer;
 use Core\Language;
 use Core\System;
+use Model\CensoreAction;
 
 class Censorship extends CoreController
 {
@@ -19,7 +20,10 @@ class Censorship extends CoreController
 
     public function render() : string {
         $this->title = Language::__("Censorship");
-        $this->content = System::template(static::CONTENT_PATH, []);
+
+        $action = new CensoreAction();
+
+        $this->content = System::template(static::CONTENT_PATH, ['getAll' => $action->getAll()]);
         $mainHtml = Includer::includeHTML(static::INCLUDE_PATH, $this);
         return $mainHtml;
     }
