@@ -14,7 +14,7 @@ class CensoreAction implements ContainerCensoreAction
 
         $queryString = "SELECT * FROM Censorship";
 
-        $result_arr = mysqli_fetch_all(mysqli_query($connect, $queryString),MYSQLI_ASSOC);
+        $result_arr = mysqli_fetch_all(mysqli_query($connect, $queryString), MYSQLI_ASSOC);
 
         return $result_arr ?? [];
     }
@@ -32,5 +32,5 @@ class CensoreAction implements ContainerCensoreAction
 
     public function delete($id): bool {
         return true;
-    }
+    } 
 }
