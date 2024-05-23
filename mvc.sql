@@ -16,6 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Censorship`
+--
+
+DROP TABLE IF EXISTS `Censorship`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Censorship` (
+  `censorship_id` int NOT NULL AUTO_INCREMENT,
+  `censorship_word` varchar(255) NOT NULL,
+  PRIMARY KEY (`censorship_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Censorship`
+--
+
+LOCK TABLES `Censorship` WRITE;
+/*!40000 ALTER TABLE `Censorship` DISABLE KEYS */;
+INSERT INTO `Censorship` VALUES (16,'check');
+/*!40000 ALTER TABLE `Censorship` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `messages`
 --
 
@@ -29,8 +53,9 @@ CREATE TABLE `messages` (
   `message` text NOT NULL,
   `created_at` datetime NOT NULL,
   `status` int unsigned DEFAULT '0',
+  `user_id` int unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +64,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (3,'valera','Helo','How are you?','2020-12-25 15:39:55',0),(8,'radio','Test check','check Test adding','2024-02-13 20:21:13',0),(9,'asdasd','1231231231','asdasdasdas','2024-02-13 20:24:58',0),(10,'Hello12345','sadasd342sdfsdf','Its me Mradio','2024-02-15 20:40:36',0);
+INSERT INTO `messages` VALUES (3,'valera','Helo','How are you???','2020-12-25 15:39:55',0,0),(8,'radio','Test check','check Test adding','2024-02-13 20:21:13',0,0),(9,'asdasd','1231231231','asdasdasdas','2024-02-13 20:24:58',0,0),(10,'Hello12345','sadasd342sdfsdf','Its me Mradio','2024-02-15 20:40:36',0,0),(11,'Private','I am You but Better','Check new render function','2024-02-20 21:47:39',0,0);
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,13 +76,13 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `login` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` int unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +91,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (4,'asdasd@gmail.com','User','$2y$10$X21HNke9w1zS.qyYR.X/Pu329YtmcI6u9aghtivzlwyVRbTA/CaN2',3),(5,'asd@gmail.com','Manager','$2y$10$Gu291Y/fllOAVekQqdHnFOXlIOQSuVbI7e8LSxfWmkT69YjGNz8XG',2),(6,'asd@gmail.com','Admin','$2y$10$DZVXnQToucGXSGaZRm2ERem7iiTeO6hehrRRZx5hig2yL/NlAF3pC',1);
+INSERT INTO `users` VALUES (4,'asdasd@gmail.com','User','$2y$10$X21HNke9w1zS.qyYR.X/Pu329YtmcI6u9aghtivzlwyVRbTA/CaN2',3),(5,'asd@gmail.com','Manager','$2y$10$Gu291Y/fllOAVekQqdHnFOXlIOQSuVbI7e8LSxfWmkT69YjGNz8XG',2),(6,'asd@gmail.com','Admin','$2y$10$DZVXnQToucGXSGaZRm2ERem7iiTeO6hehrRRZx5hig2yL/NlAF3pC',1),(7,'asd@gmail.com','123123','$2y$10$WaJeeojeAbo8qF5MVnzjfuRqW3ThshQZGFfl6cxWLYwablNBaLBse',3);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -79,4 +104,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-15 22:36:34
+-- Dump completed on 2024-05-23 14:12:32
