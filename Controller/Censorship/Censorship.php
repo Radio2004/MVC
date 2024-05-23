@@ -23,8 +23,15 @@ class Censorship extends CoreController
 
         $action = new CensoreAction();
 
+        if (isset($_POST['action']) && $_POST['action'] == 'addcensore') {
+            $action->add($_POST['new-censor']);
+        }
+
+        if (isset($_POST['action']) && $_POST['action'] == 'deletecensore') {
+            $action->delete($_POST['id']);
+        }
+
         $this->content = System::template(static::CONTENT_PATH, ['getAll' => $action->getAll()]);
-        $mainHtml = Includer::includeHTML(static::INCLUDE_PATH, $this);
-        return $mainHtml;
+        return Includer::includeHTML(static::INCLUDE_PATH, $this);
     }
 }

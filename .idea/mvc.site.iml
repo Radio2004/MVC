@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Controller/Contacts" isTestSource="false" packagePrefix="Controller" />
       <sourceFolder url="file://$MODULE_DIR$/Controller/Errors" isTestSource="false" packagePrefix="Controller" />
       <sourceFolder url="file://$MODULE_DIR$/Controller/Messages" isTestSource="false" packagePrefix="Controller" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="Mvc\Project\" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

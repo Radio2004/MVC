@@ -6,7 +6,7 @@ interface ContainerCensoreAction
 {
     public function getAll() : array;
 
-    public function add() : bool;
+    public function add($word) : bool;
 
     public function rename($id) : bool;
 
