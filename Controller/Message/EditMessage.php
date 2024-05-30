@@ -4,19 +4,19 @@ namespace Controller\Message;
 
 use Core\CoreController;
 use Core\DbConnect;
-use Core\Includer;
 use Core\Language;
 use Core\System;
 use Model\Messages;
 
 class EditMessage extends CoreController
 {
-    protected const CONTENT_PATH = "view/message/v_edit.php";
+    protected const CONTENT_PATH = "view/message/v_index.php";
     protected const INCLUDE_PATH = "view/base/v_con1col.php";
 
     protected string $title;
 
     protected string $content;
+
     protected array $role = [1,2];
 
     private int $idMessageFromLink;
@@ -42,7 +42,7 @@ class EditMessage extends CoreController
         }
     }
 
-    public function render(): string
+    public function render(array $params): string
     {
         // explode('/', $_SERVER['REDIRECT_URL'][2] = ID MESSAGE FROM LINK
         $this->idMessageFromLink = (int)explode('/', $_SERVER['REDIRECT_URL'])[2];
@@ -54,7 +54,6 @@ class EditMessage extends CoreController
         $this->title = Language::__('Edit');
         // Set Content
         $this->content = System::template(static::CONTENT_PATH, ['checkIsExist' => self::getCheckIsExist()]);
-        $mainHtml = Includer::includeHTML(static::INCLUDE_PATH, $this);
-        return $mainHtml;
+        return System::template(static::INCLUDE_PATH, [], $this);
     }
 }

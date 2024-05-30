@@ -4,6 +4,12 @@ use Core\Language;
 
 ?>
 <form method="post">
+<!--    --><?php //foreach ($checkIsExist as $key => $item): ?>
+<!--        <div>-->
+<!--            <label for="new---><?php //=$key?><!--">--><?php //=Language::__(ucfirst($key))?><!--</label>-->
+<!--            <input type="text" id="new---><?php //=$key?><!--" name="--><?php //=$key?><!--" placeholder="Title" value="--><?php //=$item?><!--">-->
+<!--        </div>-->
+<!--    --><?php //endforeach ?>
     <div>
         <label for="new-title"><?=Language::__('Title')?></label>
         <input type="text" id="new-title" name="message-title" placeholder="Title" value="<?=$checkIsExist['title']?>">

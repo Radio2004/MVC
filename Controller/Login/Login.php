@@ -6,7 +6,6 @@ use Core\CoreController;
 use Core\DbConnect;
 use Core\Language;
 use Core\System;
-use Core\Includer;
 use Model\Users;
 
 class Login extends CoreController {
@@ -35,7 +34,7 @@ class Login extends CoreController {
         }
     }
 
-    public function render() : string {
+    public function render(array $params) : string {
         // Get "Post" parameter but nothing
         $this->name = $_POST['login_name'] ?? '';
         $this->password = $_POST['login_password'] ?? '';
@@ -47,7 +46,6 @@ class Login extends CoreController {
         self::submit();
         // Set Content 
         $this->content = System::template(static::CONTENT_PATH, []);
-        $mainHtml = Includer::includeHTML(static::INCLUDE_PATH, $this);
-        return $mainHtml;
+        return System::template(static::INCLUDE_PATH, [], $this);
     }
 }

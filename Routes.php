@@ -48,6 +48,12 @@ return (function(){
             'regex' => "/^message\/($intGT0)\/delete\/?$/",
             'controller' => 'message/DeleteMessage',
             'params' => ['mid' => 1]
+        ],
+        [
+            //censorship/n
+            'regex' => "/^censorship\/($intGT0)\/?$/",
+            'controller' => 'Censorship/Censorship',
+            'params' => ['mid' => 1]
         ]
     ];
 })();

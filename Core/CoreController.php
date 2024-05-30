@@ -34,5 +34,5 @@ abstract class CoreController {
         return false;
     }
 
-    abstract public function render() : string;
+    abstract public function render(array $params) : string;
 }

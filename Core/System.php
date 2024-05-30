@@ -56,12 +56,14 @@ class System
         return $word;
     }
 
-   public static function template(string $path, array $params): string {
+   public static function template(string $path, array $params, $controller = 0): string {
         $html = '';
         ob_start();
+
         extract($params);
 
         include($path);
+
         $html = ob_get_clean();
         return $html;
     }

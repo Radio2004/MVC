@@ -4,7 +4,6 @@ namespace Controller\Register;
 
 use Core\CoreController;
 use Core\DbConnect;
-use Core\Includer;
 use Core\Language;
 use Core\System;
 use Model\Users;
@@ -39,7 +38,7 @@ class Register extends CoreController {
         }
     }
 
-    public function render(): string
+    public function render(array $params): string
     {
         // Check Is Exist
         self::checkIsRegistered();
@@ -53,7 +52,6 @@ class Register extends CoreController {
         self::registerUser();
         // Set Content
         $this->content = System::template(static::CONTENT_PATH, []);
-        $mainHtml = Includer::includeHTML(static::INCLUDE_PATH, $this);
-        return $mainHtml;
+        return System::template(static::INCLUDE_PATH, [], $this);
     }
 }

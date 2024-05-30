@@ -7,7 +7,6 @@ use Core\DbConnect;
 use Core\CoreController;
 use Core\Language;
 use Core\System;
-use Core\Includer;
 use Model\Messages;
 
 class DeleteMessage extends CoreController {
@@ -38,7 +37,7 @@ class DeleteMessage extends CoreController {
         }
     }
 
-    public function render() : string {
+    public function render(array $params) : string {
         // explode('/', $_SERVER['REDIRECT_URL'][2] = ID MESSAGE FROM LINK
         $this->idMessageFromLink = (int)explode('/', $_SERVER['REDIRECT_URL'])[2];
         // Check id message is in database
@@ -51,7 +50,6 @@ class DeleteMessage extends CoreController {
         self::deleteMessage();
         // Set Content
         $this->content = System::template(self::CONTENT_PATH, []);
-        $mainHtml = Includer::includeHTML(static::INCLUDE_PATH, $this);
-        return $mainHtml;
+        return System::template(static::INCLUDE_PATH, [], $this);
     }
 }

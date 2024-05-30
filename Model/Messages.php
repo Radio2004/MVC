@@ -25,7 +25,7 @@ class Messages
 
     public static function setMessage($connect, $fields) : bool {
 
-        $queryString = sprintf("INSERT into messages VALUES (null, '%s', '%s', '%s', now(), '0')", $fields['name'], $fields['title'], $fields['message']);
+        $queryString = sprintf("INSERT into messages VALUES (null, '%s', '%s', '%s', now(), '0', '%s', '1')", $fields['name'], $fields['title'], $fields['message'], $_SESSION['user_id']);
         $result = mysqli_query($connect, $queryString) or die(mysqli_error($connect));
         return is_bool($result)? $result : false;
     }

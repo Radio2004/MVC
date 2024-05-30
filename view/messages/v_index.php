@@ -9,6 +9,7 @@ if ($successText): ?>
     <?php foreach ($messages as $message): ?>
     <li>
         <label><strong><?= Language::__('Message id') ?>:</strong></label><em><?= $message['id'] ?></em><br>
+        <label><strong><?= Language::__('User id') ?>:</strong></label><em><?= $message['user_id'] ?></em><br>
         <label><strong><?= Language::__('User Name') ?>:</strong></label><em><?= $message['name'] ?></em><br>
         <label><strong><?= Language::__('Title') ?>:</strong></label><em><?= $message['title'] ?></em><br>
         <label><strong><?= Language::__('Message') ?>:</strong></label><em><?= $message['message'] ?></em><br>

@@ -15,6 +15,7 @@ $left = '';
 
 $cname = '';
 $badUrl = BASE_URL . 'index.php';
+$params = [];
 
 if (strpos($_SERVER['REQUEST_URI'], $badUrl) === 0) {
     $cname = 'errors/Error';
@@ -25,7 +26,6 @@ if (strpos($_SERVER['REQUEST_URI'], $badUrl) === 0) {
     $routerRes = System::parseUrl($url, $routes);
     $cname = $routerRes['controller'];
     $params = $routerRes['params'] ?? [];
-
     $urlLen = strlen($url);
 
     if ($urlLen > 0 && $url[$urlLen - 1] == '/') {
@@ -36,4 +36,4 @@ if (strpos($_SERVER['REQUEST_URI'], $badUrl) === 0) {
 $path = "Controller\\$cname";
 $path = str_replace("/", '\\', $path);
 $controller = new $path();
-echo $controller->render();
+echo $controller->render($params);

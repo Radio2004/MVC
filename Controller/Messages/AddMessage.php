@@ -5,7 +5,6 @@ namespace Controller\Messages;
 use Core\ArrFields;
 use core\CoreController;
 use core\DbConnect;
-use Core\Includer;
 use Core\Language;
 use Core\System;
 use Model\Messages;
@@ -36,7 +35,7 @@ class AddMessage extends CoreController {
         return $_POST?Messages::messagesValidate($getFields):[];
     }
 
-    public function render(): string
+    public function render(array $params): string
     {
         // Set Title
         $this->title = Language::__('Add message');
@@ -44,8 +43,7 @@ class AddMessage extends CoreController {
         self::checkSetMessage();
         // Set Content
         $this->content = System::template(static::CONTENT_PATH, ['validateErrors' => self::getValidateErrors(), 'fields' => self::getFields()]);
-        $mainHtml = Includer::includeHTML(static::INCLUDE_PATH, $this);
-        return $mainHtml;
+        return System::template(static::INCLUDE_PATH, [], $this);
     }
 
 }

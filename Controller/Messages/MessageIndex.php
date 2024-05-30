@@ -8,7 +8,6 @@ use core\CoreController;
 use core\DbConnect;
 use Core\Language;
 use Core\System;
-use Core\Includer;
 use Model\Messages;
 
 
@@ -32,7 +31,7 @@ class MessageIndex extends CoreController
         }
     }
 
-    public function render() : string
+    public function render(array $params) : string
     {
         // Set Title
         $this->title = Language::__('Chat List');
@@ -44,7 +43,6 @@ class MessageIndex extends CoreController
         $boolResult = $this->getBoolRole([1,2]); 
         // Content
         $this->content = System::template(static::CONTENT_PATH, ['successText' => $this->successText, 'messages' => $messages, 'boolResult' => $boolResult]);
-        $mainHtml = Includer::includeHTML(static::INCLUDE_PATH, $this);
-        return $mainHtml;
+        return System::template(static::INCLUDE_PATH, [], $this);
     }
 }

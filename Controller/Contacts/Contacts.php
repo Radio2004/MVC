@@ -9,7 +9,6 @@ namespace Controller\Contacts;
 use Core\CoreController;
 use Core\Language;
 use Core\System;
-use Core\Includer;
 
 class Contacts extends CoreController {
     protected const CONTENT_PATH = "view/contacts/v_index.php";
@@ -17,10 +16,9 @@ class Contacts extends CoreController {
     protected string $title;
     protected string $content;
 
-    public function render() : string {
+    public function render(array $params) : string {
         $this->title = Language::__("Contacts");
         $this->content = System::template(static::CONTENT_PATH, []);
-        $mainHtml = Includer::includeHTML(static::INCLUDE_PATH, $this);
-        return $mainHtml;
+        return System::template(static::INCLUDE_PATH, [], $this);
     }
 }

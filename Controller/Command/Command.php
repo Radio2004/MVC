@@ -16,7 +16,7 @@ class Command
         }
     }
 
-    public function getConsoleCommand()
+    public function getConsoleCommand(): void
     {
         $result = shell_exec($this->consoleCommand);
         if ($result == '') {$result = 'Error';}

@@ -54,8 +54,11 @@ CREATE TABLE `messages` (
   `created_at` datetime NOT NULL,
   `status` int unsigned DEFAULT '0',
   `user_id` int unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
+  `visible` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +67,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (3,'valera','Helo','How are you???','2020-12-25 15:39:55',0,0),(8,'radio','Test check','check Test adding','2024-02-13 20:21:13',0,0),(9,'asdasd','1231231231','asdasdasdas','2024-02-13 20:24:58',0,0),(10,'Hello12345','sadasd342sdfsdf','Its me Mradio','2024-02-15 20:40:36',0,0),(11,'Private','I am You but Better','Check new render function','2024-02-20 21:47:39',0,0);
+INSERT INTO `messages` VALUES (12,'Hello','blablablaadsasdsd','here is word ','2024-05-23 18:31:37',0,6,1);
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,4 +107,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-23 14:12:32
+-- Dump completed on 2024-05-30 15:01:06
