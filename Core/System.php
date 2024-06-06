@@ -25,8 +25,13 @@ class System
         foreach($routes as $route){
             $matches = [];
 
-            if(preg_match($route['regex'], $url, $matches)){
-                $result['controller'] = $route['controller'];
+            $regex = (string)$route->regex;
+
+            $controller = (string)$route->controller;
+
+
+            if(preg_match($regex, $url, $matches)){
+                $result['controller'] = $controller;
 
                 if(isset($route['params'])){
                     foreach($route['params'] as $name => $num){

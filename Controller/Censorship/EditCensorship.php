@@ -5,6 +5,7 @@ namespace Controller\Censorship;
 use Core\CoreController;
 use Core\Includer;
 use Core\System;
+use Core\Language;
 use Model\EditBuilder;
 
 class EditCensorship extends CoreController
@@ -21,9 +22,15 @@ class EditCensorship extends CoreController
 
     public function render(array $params) : string {
 
+        $this->title = Language::__('Edit');
+
         $editBuilder = new EditBuilder();
 
-        $getData = $editBuilder->build();
+        $data = ["censorship_word"];
+
+        var_dump($params);
+
+        $getData = $editBuilder->build($params['mid'], $data);
 
         $this->content = System::template(static::CONTENT_PATH, ['getData' => $getData]);
         return System::template(static::INCLUDE_PATH, [], $this);

@@ -13,6 +13,9 @@ $left = '';
  * @var string $content
  */
 
+$xml = simplexml_load_file('routes.xml');
+
+
 $cname = '';
 $badUrl = BASE_URL . 'index.php';
 $params = [];
@@ -20,10 +23,11 @@ $params = [];
 if (strpos($_SERVER['REQUEST_URI'], $badUrl) === 0) {
     $cname = 'errors/Error';
 } else {
-    $routes = include ('routes.php');
+    // $routes = include ('routes.php');
+    $xmlRoutes = $xml->xpath("route[@disabled='false']");
     $url = $_GET['mvcsystemurl'] ?? '';
 
-    $routerRes = System::parseUrl($url, $routes);
+    $routerRes = System::parseUrl($url, $xmlRoutes);
     $cname = $routerRes['controller'];
     $params = $routerRes['params'] ?? [];
     $urlLen = strlen($url);

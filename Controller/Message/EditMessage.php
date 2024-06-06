@@ -10,7 +10,7 @@ use Model\Messages;
 
 class EditMessage extends CoreController
 {
-    protected const CONTENT_PATH = "view/message/v_index.php";
+    protected const CONTENT_PATH = "view/message/v_edit.php";
     protected const INCLUDE_PATH = "view/base/v_con1col.php";
 
     protected string $title;

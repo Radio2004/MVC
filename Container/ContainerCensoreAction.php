@@ -8,7 +8,7 @@ interface ContainerCensoreAction
 
     public function add($word) : bool;
 
-    public function rename($id) : bool;
+    public function edit($id) : bool;
 
     public function delete($id) : bool;
 }

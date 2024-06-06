@@ -41,7 +41,7 @@ class CensoreAction implements ContainerCensoreAction
         return false;
     }
 
-    public function rename($id): bool {
+    public function edit($id): bool {
         return true;
     }
 

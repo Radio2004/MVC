@@ -40,7 +40,7 @@ class EditBuilder implements ContainerEdit
         $this->idMessageFromLink = (int)$id;
     }
 
-    public function build(...$array): array
+    public function build(array ...$array): array
     {
         // TODO: Implement changeMessage() method.
 
@@ -50,8 +50,10 @@ class EditBuilder implements ContainerEdit
         // If change was confirmed
         self::changeMessage();
 
+        
 
+        return [
 
-        return [];
+        ];
     }
 }

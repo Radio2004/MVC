@@ -19,8 +19,9 @@
             </p>
             <div class="d-flex justify-content-between">
                 <form method="post">
-                    <input type="hidden" name="action" value="editcensore">
-                    <button class="btn btn-primary">Edit</button>
+                    <button class="p-0 border-0">
+                        <a class="btn btn-primary messages-link" href="<?=BASE_URL?>censorship/<?=$word['censorship_id']?>/edit">Edit</a>
+                    </button>
                 </form>
                 <form method="post">
                     <input type="hidden" name="action" value="deletecensore">

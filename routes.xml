@@ -1,0 +1,55 @@
+<routes>
+    <route disabled="false">
+        <regex>/^$/</regex>
+        <controller>Messages/MessageIndex</controller>
+    </route>
+    <route disabled="false">
+        <regex>/^messages\/?$/</regex>
+        <controller>Messages/MessageIndex</controller>
+    </route>
+    <route disabled="false">
+        <regex>/^messages\/add\/?$/</regex>
+        <controller>Messages/AddMessage</controller>
+    </route>
+    <route disabled="false">
+        <regex>/^contacts\/?$/</regex>
+        <controller>Contacts/Contacts</controller>
+    </route>
+    <route disabled="false">
+        <regex>/^register\/?$/</regex>
+        <controller>Register/Register</controller>
+    </route>
+    <route disabled="false">
+        <regex>/^login\/?$/</regex>
+        <controller>Login/Login</controller>
+    </route>
+    <route disabled="false">
+        <regex>/^command\/?$/</regex>
+        <controller>Command/Command</controller>
+    </route>
+    <route disabled="false">
+        <regex>/^censorship\/?$/</regex>
+        <controller>Censorship/Censorship</controller>
+    </route>
+    <route disabled="false">
+        <regex>/^message\/[1-9]+\d*\/edit\/?$/</regex>
+        <controller>message/EditMessage</controller>
+        <params>
+            <mid>1</mid>
+        </params>
+    </route>
+    <route disabled="false">
+        <regex>/^message\/[1-9]+\d*\/delete\/?$/</regex>
+        <controller>message/DeleteMessage</controller>
+        <params>
+            <mid>1</mid>
+        </params>
+    </route>
+    <route disabled="false">
+        <regex>/^censorship\/[1-9]+\d*\/edit\/?$/</regex>
+        <controller>Censorship/EditCensorship</controller>
+        <params>
+            <mid>1</mid>
+        </params>
+    </route>
+</routes>
