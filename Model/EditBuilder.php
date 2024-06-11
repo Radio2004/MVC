@@ -3,6 +3,7 @@
 namespace Model;
 
 use Container\ContainerEdit;
+use Core\MysqlRequest;
 use Core\DbConnect;
 
 class EditBuilder implements ContainerEdit
@@ -10,15 +11,28 @@ class EditBuilder implements ContainerEdit
 
     private int $idMessageFromLink = 0;
 
-    public function getCheckIsExist(): array
+    public static function isAlreadyExist(int $idMessage, $connect, array $requsets) : array {
+
+        $mysqlRequset = new MysqlRequest();
+
+        $result = count($requsets) > 0 ? $mysqlRequset-> getValue($requsets, 'Censorship') : $mysqlRequset->getAll('Censorship');
+
+        if (!mysqli_num_rows($result) > 0) {
+            return [];
+        }
+
+        return $result;
+    }
+
+    public function getCheckIsExist($requsets): array
     {
-       return Messages::isAlreadyExist($this->idMessageFromLink, DbConnect::getConnect(), 'message');
+       return self::isAlreadyExist($this->idMessageFromLink, DbConnect::getConnect(), $requsets);
     }
 
     public function checkMessageExistence(): void
     {
         // TODO: Implement checkMessageExistence() method.
-        if (empty(self::getCheckIsExist()) && $this->idMessageFromLink != 0) {
+        if (empty(self::getCheckIsExist())) {
             header('Location: ' . HOST . BASE_URL . 'error');
             exit;
         }
@@ -34,26 +48,20 @@ class EditBuilder implements ContainerEdit
         }
     }
 
-    function __construct() {
+    function __construct($params) {
         $id = $params['mid'] ?? 0;
 
-        $this->idMessageFromLink = (int)$id;
+        $this->idMessageFromLink = $id;
     }
 
-    public function build(array ...$array): array
+    public function build(array $array): array
     {
         // TODO: Implement changeMessage() method.
 
         // Check ID Message is in Database
         self::checkMessageExistence();
-
-        // If change was confirmed
-        self::changeMessage();
-
         
 
-        return [
-
-        ];
+        return self::getCheckIsExist($array);
     }
 }

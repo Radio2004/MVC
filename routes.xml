@@ -32,21 +32,21 @@
         <controller>Censorship/Censorship</controller>
     </route>
     <route disabled="false">
-        <regex>/^message\/[1-9]+\d*\/edit\/?$/</regex>
+        <regex>/^message\/([1-9]+\d*)\/edit\/?$/</regex>
         <controller>message/EditMessage</controller>
         <params>
             <mid>1</mid>
         </params>
     </route>
     <route disabled="false">
-        <regex>/^message\/[1-9]+\d*\/delete\/?$/</regex>
+        <regex>/^message\/([1-9]+\d*)\/delete\/?$/</regex>
         <controller>message/DeleteMessage</controller>
         <params>
             <mid>1</mid>
         </params>
     </route>
     <route disabled="false">
-        <regex>/^censorship\/[1-9]+\d*\/edit\/?$/</regex>
+        <regex>/^censorship\/([1-9]+\d*)\/edit\/?$/</regex>
         <controller>Censorship/EditCensorship</controller>
         <params>
             <mid>1</mid>

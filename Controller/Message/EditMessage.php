@@ -45,7 +45,8 @@ class EditMessage extends CoreController
     public function render(array $params): string
     {
         // explode('/', $_SERVER['REDIRECT_URL'][2] = ID MESSAGE FROM LINK
-        $this->idMessageFromLink = (int)explode('/', $_SERVER['REDIRECT_URL'])[2];
+        // $this->idMessageFromLink = (int)explode('/', $_SERVER['REDIRECT_URL'])[2];
+        $this->idMessageFromLink = $params['mid'];
         // Check ID Message is in Database
         self::checkMessageExistence();
         // If change was confirmed

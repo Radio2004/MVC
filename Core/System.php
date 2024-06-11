@@ -33,8 +33,10 @@ class System
             if(preg_match($regex, $url, $matches)){
                 $result['controller'] = $controller;
 
-                if(isset($route['params'])){
-                    foreach($route['params'] as $name => $num){
+                $params = (array)$route->params;
+
+                if(isset($params)){
+                    foreach($params as $name => $num){
                         $result['params'][$name] = $matches[$num];
                     }
                 }

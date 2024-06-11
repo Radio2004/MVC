@@ -24,13 +24,11 @@ class EditCensorship extends CoreController
 
         $this->title = Language::__('Edit');
 
-        $editBuilder = new EditBuilder();
+        $editBuilder = new EditBuilder($params);
 
         $data = ["censorship_word"];
 
-        var_dump($params);
-
-        $getData = $editBuilder->build($params['mid'], $data);
+        $getData = $editBuilder->build($data);
 
         $this->content = System::template(static::CONTENT_PATH, ['getData' => $getData]);
         return System::template(static::INCLUDE_PATH, [], $this);
