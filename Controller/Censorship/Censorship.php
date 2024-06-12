@@ -21,20 +21,36 @@ class Censorship extends CoreController
 
     protected array $role = [1];
 
+    protected $action;
+
+    public function addCensore(): void
+    {
+        if (isset($_POST['action']) && $_POST['action'] == 'addcensore') {
+            $this->action->add($_POST['new-censor']);
+            header('Location: ' . $_SERVER['REQUEST_URI']);
+            exit;
+        }
+    }
+
+    public function deleteCensore(): void
+    {
+        if (isset($_POST['action']) && $_POST['action'] == 'deletecensore') {
+            $this->action->delete($_POST['id']);
+            header('Location: ' . $_SERVER['REQUEST_URI']);
+            exit;
+        }
+    }
+
     public function render(array $params) : string {
         $this->title = Language::__("Censorship");
 
-        $action = new CensoreAction();
+        $this->action = new CensoreAction();
 
-        if (isset($_POST['action']) && $_POST['action'] == 'addcensore') {
-            $action->add($_POST['new-censor']);
-        }
+        self::addCensore();
 
-        if (isset($_POST['action']) && $_POST['action'] == 'deletecensore') {
-            $action->delete($_POST['id']);
-        }
+        self::deleteCensore();
 
-        $this->content = System::template(static::CONTENT_PATH, ['getAll' => $action->getAll()]);
+        $this->content = System::template(static::CONTENT_PATH, ['getAll' => $this->action->getAll()]);
         return  System::template(static::INCLUDE_PATH, [], $this);
     }
 }

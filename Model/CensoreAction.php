@@ -10,14 +10,18 @@ use Core\System;
 
 class CensoreAction implements ContainerCensoreAction
 {
+    private int $idMessageFromLink;
+
+    public function __construct($id = -1)
+    {
+        $this->idMessageFromLink = (int)$id;
+    }
     public function getAll(): array {
         $connect = DbConnect::getConnect();
 
         $queryString = "SELECT * FROM Censorship";
 
-        $result_arr = mysqli_fetch_all(mysqli_query($connect, $queryString),MYSQLI_ASSOC);
-
-        return $result_arr;
+        return mysqli_fetch_all(mysqli_query($connect, $queryString),MYSQLI_ASSOC);
     }
 
     public function add($word): bool {
@@ -41,7 +45,15 @@ class CensoreAction implements ContainerCensoreAction
         return false;
     }
 
-    public function edit($id): bool {
+    public function edit($post): bool {
+        $connect = DbConnect::getConnect();
+
+        $postWord = mysqli_real_escape_string($connect, $post['Censorship_word']);
+
+        $queryChange = "UPDATE Censorship SET Censorship_word = '$postWord' WHERE censorship_id = '$this->idMessageFromLink'";
+
+        mysqli_query($connect, $queryChange);
+
         return true;
     }
 
@@ -55,5 +67,15 @@ class CensoreAction implements ContainerCensoreAction
         $queryDeleteResult = mysqli_query($connect, $queryDelete);
 
         return is_bool($queryDeleteResult);
+    }
+
+    public function isAlreadyExist() : array {
+
+        $connect = DbConnect::getConnect();
+
+        $queryString = "SELECT Censorship_word FROM Censorship WHERE censorship_id = '$this->idMessageFromLink'";
+        $result_arr = mysqli_fetch_array(mysqli_query($connect, $queryString),MYSQLI_ASSOC);
+
+        return $result_arr ?? [];
     }
 }
