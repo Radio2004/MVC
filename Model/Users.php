@@ -24,13 +24,13 @@ class Users
         if (!mysqli_num_rows($result) > 0) {
 
             // Insert
-            $queryRegister = "INSERT INTO users (login, password, email, role) VALUES ('$registerName', '$hashPassword', '$registerEmail', 1)";
+            $queryRegister = "INSERT INTO users (login, password, email, role) VALUES ('$registerName', '$hashPassword', '$registerEmail', 3)";
             mysqli_query($connect, $queryRegister);
 
             // Get Data After Insert
             $idAfterInsert = mysqli_insert_id($connect);
             // Get data New User
-            $queryName = "SELECT id, login, role FROM users WHERE id='$idAfterInsert'";
+            $queryName = "SELECT user_id, login, role FROM users WHERE user_id='$idAfterInsert'";
             $queryResult = mysqli_query($connect, $queryName);
             $row = mysqli_fetch_array($queryResult, MYSQLI_ASSOC);
             // Add Data User in Session

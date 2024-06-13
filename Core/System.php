@@ -56,7 +56,8 @@ class System
         if ($word === false){
             return false;
         }
-        if (str_contains($word, ' ') !== false) {
+
+        if (preg_match('/\s+/', $word)) {
             return false;
         }
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * @website: https://profstep.com
  **/
 
-const HOST = 'http://mvc.site';
+const HOST = 'http://mvcshupa.site';
 const BASE_URL =  '/';
 
 function autoload($className): void
