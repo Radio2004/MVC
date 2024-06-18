@@ -43,12 +43,15 @@ class DeleteMessage extends CoreController {
         $this->idMessageFromLink = $params['mid'];
         // Check id message is in database
         self::checkMessageExistence();
-        // Title
-        $this->title = Language::__('Delete');
-        // If role isn't Admin or Manager then link to Error404
-        self::checkRole();
+        // Get message
+        $message = Messages::getMessage(DbConnect::getConnect(), $this->idMessageFromLink);
+        if ($message['user_id'] == $_SESSION['user_id']) $this->role[] = 3;
         // If delete was confirmed
         self::deleteMessage();
+        // If role isn't Admin or Manager then link to Error404
+        self::checkRole();
+        // Title
+        $this->title = Language::__('Delete');
         // Set Content
         $this->content = System::template(self::CONTENT_PATH, []);
         return System::template(static::INCLUDE_PATH, [], $this);

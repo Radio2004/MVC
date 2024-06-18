@@ -40,7 +40,7 @@ class MessageIndex extends CoreController
         // Check Is Added Messages
         $this->isAddedMessage();
         // Get bool role result, what allow Admin and Manager Edit/Delete Messages
-        $boolResult = $this->getBoolRole([1,2]); 
+        $boolResult = $this->getBoolRole([1,2]);
         // Content
         $this->content = System::template(static::CONTENT_PATH, ['successText' => $this->successText, 'messages' => $messages, 'boolResult' => $boolResult]);
         return System::template(static::INCLUDE_PATH, [], $this);

@@ -49,6 +49,10 @@ class EditMessage extends CoreController
         $this->idMessageFromLink = $params['mid'];
         // Check ID Message is in Database
         self::checkMessageExistence();
+        $message = Messages::getMessage(DbConnect::getConnect(), $this->idMessageFromLink);
+        if ($message['user_id'] == $_SESSION['user_id']) $this->role[] = 3;
+        // If role isn't Admin or Manager then link to Error404
+        self::checkRole();
         // If change was confirmed
         self::changeMessage();
         // Set Title

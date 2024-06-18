@@ -19,12 +19,13 @@ class Command
     public function getConsoleCommand(): void
     {
         $result = shell_exec($this->consoleCommand);
-        if ($result == '') {$result = 'Error';}
         echo $result;
     }
 
     public function render(): void {
-        $this->setConsoleCommand($_POST['command']);
-        $this->getConsoleCommand();
+//        $this->setConsoleCommand($_POST['command']);
+//        $this->getConsoleCommand();
+        $output = shell_exec('php Controller/Command/Procces.php censorship:filter');
+        echo $output;
     }
 }

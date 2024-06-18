@@ -12,14 +12,14 @@ use Core\Language;
 class Messages
 {
     public static function getMessages($connect) : array {
-        $queryString = "SELECT * FROM messages WHERE 1";
+        $queryString = "SELECT * FROM messages WHERE visible = 1";
         $result_arr = mysqli_fetch_all(mysqli_query($connect, $queryString),MYSQLI_ASSOC);
         return $result_arr ?? [];
     }
 
     public static function getMessage($connect, $id) : array {
         $queryString = sprintf("SELECT * FROM messages WHERE id = %s", $id);
-        $result_arr = mysqli_fetch_accos(mysqli_query($connect, $queryString));
+        $result_arr = mysqli_fetch_array(mysqli_query($connect, $queryString), MYSQLI_ASSOC);
         return $result_arr ?? [];
     }
 
@@ -54,7 +54,7 @@ class Messages
     }
 
     public static function deleteMessage(int $idMessageFromLink, $connect) : void {
-        $queryDelete = "DELETE FROM messages WHERE id = '$idMessageFromLink'";
+        $queryDelete = "UPDATE messages SET visible = '0' WHERE id = '$idMessageFromLink'";
 
         $queryDeleteResult = mysqli_query($connect, $queryDelete);
     }

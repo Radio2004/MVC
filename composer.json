@@ -4,11 +4,14 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Mvc\\Project\\": "src/"
+            "Mvc\\Project\\": "src/",
+            "bin\\": "bin"
         }
     },
     "require": {
         "twig/twig": "^3.8",
-      "ext-mysqli": "*"
+      "ext-mysqli": "*",
+        "symfony/process": "^6.4",
+        "symfony/console": "^6.4"
     }
 }
