@@ -24,20 +24,29 @@ class CensoreAction implements ContainerCensoreAction
         return mysqli_fetch_all(mysqli_query($connect, $queryString),MYSQLI_ASSOC);
     }
 
+    public function getCensoreMessages(): array
+    {
+        $connect = DbConnect::getConnect();
+
+        $queryString = "SELECT * FROM censorship_messages";
+
+        return mysqli_fetch_all(mysqli_query($connect, $queryString),MYSQLI_ASSOC);
+    }
+
     public function add($word): bool {
         $connect = DbConnect::getConnect();
 
         $validateWord = System::validateInput($word) or die('Error');
 
         // Check If Login Already Exists
-        $query = "SELECT * FROM censorship WHERE censorship_word = '$validateWord'";
+        $query = "SELECT * FROM Censorship WHERE censorship_word = '$validateWord'";
 
         // Get Result
         $result = mysqli_query($connect, $query);
 
         // If Login Not Exists
         if (!mysqli_num_rows($result) > 0) {
-            $queryString = sprintf("INSERT into censorship VALUES (null, '%s')", mysqli_real_escape_string($connect, $validateWord));
+            $queryString = sprintf("INSERT into Censorship VALUES (null, '%s')", mysqli_real_escape_string($connect, $validateWord));
             $result = mysqli_query($connect, $queryString) or die(mysqli_error($connect));
             return is_bool($result);
         }
@@ -62,7 +71,7 @@ class CensoreAction implements ContainerCensoreAction
 
         $sqlInjection = mysqli_real_escape_string($connect, $id);
 
-        $queryDelete = "DELETE FROM censorship WHERE censorship_id = '$sqlInjection'";
+        $queryDelete = "DELETE FROM Censorship WHERE censorship_id = '$sqlInjection'";
 
         $queryDeleteResult = mysqli_query($connect, $queryDelete);
 

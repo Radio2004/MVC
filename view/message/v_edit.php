@@ -6,11 +6,11 @@ use Core\Language;
 <form method="post">
     <div>
         <label for="new-title"><?=Language::__('Title')?></label>
-        <input type="text" id="new-title" name="message-title" placeholder="Title" value="<?=$checkIsExist['title']?>">
+        <input type="text" id="new-title" name="message-title" placeholder="Title" required value="<?=$checkIsExist['title']?>">
     </div>
     <div>
         <label for="new-message"><?=Language::__('Message')?></label>
-        <input type="text" id="new-message" name="message-content" placeholder="Message" value="<?=$checkIsExist['message']?>">
+        <input type="text" id="new-message" name="message-content" placeholder="Message" required value="<?=$checkIsExist['message']?>">
     </div>
     <div>
         <button class="btn btn-secondary" type="submit" name="yes-edit">

@@ -1,3 +1,14 @@
+@keyframes illumination {
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.5;
+	}
+}
+
 html {
 	position: relative;
 	min-height: 100%;
@@ -238,4 +249,8 @@ ul>li {
 
 .not-checked {
 	color: #FF0000FF;
+}
+
+main ul>li[id^='message']:target {
+	animation: illumination 3s 3;
 }

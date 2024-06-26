@@ -1,3 +1,7 @@
+<?php
+    $isNullCensoreMess = true;
+?>
+
 <main>
     <div>
         <form method="post">
@@ -17,7 +21,24 @@
             <p class="text-center border-bottom censorship-word">
                 <?= $word['censorship_word'] ?>
             </p>
-            <div class="d-flex justify-content-between">
+            <div>
+                <h5>Id Messages:</h5>
+                <?php foreach ($getCensoreMessages as $message) : ?>
+
+                <?php if ($message['censorship_id'] === $word['censorship_id']) : ?>
+
+                    <?php $isNullCensoreMess = false ?>
+                    <a href="<?=BASE_URL?>#message-<?=$message['message_id']?>">Id <?=$message['message_id']?></a>
+
+                <?php endif ?>
+
+                <?php endforeach ?>
+
+                <?php if ($isNullCensoreMess) : ?>
+                    <span>Null</span>
+                <?php endif ?>
+            </div>
+            <div class="d-flex justify-content-between border-top pt-2">
                 <form method="post">
                     <button class="p-0 border-0">
                         <a class="btn btn-primary messages-link" href="<?=BASE_URL?>censorship/<?=$word['censorship_id']?>/edit">Edit</a>

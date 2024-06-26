@@ -34,7 +34,7 @@ return (function(){
             'controller' => 'Command/Command'
         ],
         [
-            'regex' => '/^censorship\/?$/',
+            'regex' => '/^censoreFilter\/?$/',
             'controller' => 'Censorship/Censorship'
         ],
         [
@@ -50,8 +50,8 @@ return (function(){
             'params' => ['mid' => 1]
         ],
         [
-            //censorship/n
-            'regex' => "/^censorship\/($intGT0)\/?$/",
+            //censoreFilter/n
+            'regex' => "/^censoreFilter\/($intGT0)\/?$/",
             'controller' => 'Censorship/Censorship',
             'params' => ['mid' => 1]
         ]

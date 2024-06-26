@@ -1,4 +1,7 @@
-<?php use Core\Language;
+<?php
+
+use Core\Language;
+use Model\Messages;
 
 if ($successText): ?>
     <div class="alert alert-success" role="alert">
@@ -7,16 +10,18 @@ if ($successText): ?>
 <?php endif; ?>
 <ul>
     <?php foreach ($messages as $message): ?>
-    <li>
+    <li id="message-<?=$message['id']?>">
+        <?php if ($boolResult) : ?>
         <div class="wrapper-status-message">
             <p>
                 <?php if ($message['status']) : ?>
-                <span class="checked">Checked</span>
+                    <span class="checked">Checked <?= Messages::format_time_ago($message['censorship_check_date'])?></span>
                 <?php else: ?>
-                <span class="not-checked">Not Checked</span>
+                    <span class="not-checked">Not Checked</span>
                 <?php endif ?>
             </p>
         </div>
+        <?php endif ?>
         <label><strong><?= Language::__('Message id') ?>:</strong></label><em><?= $message['id'] ?></em><br>
         <label><strong><?= Language::__('User id') ?>:</strong></label><em><?= $message['user_id'] ?></em><br>
         <label><strong><?= Language::__('User Name') ?>:</strong></label><em><?= $message['name'] ?></em><br>

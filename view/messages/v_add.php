@@ -5,10 +5,6 @@ use Core\Language;
 ?>
 <form method="post">
     <div>
-        <label for="messageName"><?= Language::__('User Name') ?></label>
-        <input id="messageName" name="name" value="<?= $fields['name'] ?>">
-    </div>
-    <div>
         <label for="messageName"><?= Language::__('Title') ?></label>
         <input id="messageName" name="title" value="<?= $fields['title'] ?>">
     </div>

@@ -14,7 +14,7 @@ class AddMessage extends CoreController {
     protected const INCLUDE_PATH = "view/base/v_con1col.php";
     protected string $title;
     protected string $content;
-    private array $neededFieldsArray = ['name', 'title', 'message'];
+    private array $neededFieldsArray = ['title', 'message'];
     public function checkSetMessage() : void
     {
         if(empty(self::getValidateErrors()) and count($_POST)) {

@@ -5,8 +5,9 @@
     "autoload": {
         "psr-4": {
             "Mvc\\Project\\": "src/",
-            "bin\\": "bin"
-        }
+            "Model\\Console\\": "Model/Console/"
+        },
+        "psr-0": { "Mvc\\Project\\": "src/" }
     },
     "require": {
         "twig/twig": "^3.8",

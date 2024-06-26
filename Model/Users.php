@@ -47,8 +47,11 @@ class Users
         $loginPassword = System::validateInput($loginPassword);
         // Searching For a User by Username
         $queryLogin = "SELECT * FROM users WHERE login = '$loginName'";
+
         $resultLogin = mysqli_query($connect, $queryLogin);
+
         $row = mysqli_fetch_array($resultLogin,MYSQLI_ASSOC);
+
         // If Everything Is Fine, Then Write Down Its Data
         if (mysqli_num_rows($resultLogin) == 1 && password_verify($loginPassword, $row['password'])) {
             $_SESSION['user_id'] = $row['user_id'];

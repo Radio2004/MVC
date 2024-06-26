@@ -50,7 +50,9 @@ class Censorship extends CoreController
 
         self::deleteCensore();
 
-        $this->content = System::template(static::CONTENT_PATH, ['getAll' => $this->action->getAll()]);
+        $getCensoreMessages = $this->action->getCensoreMessages();
+
+        $this->content = System::template(static::CONTENT_PATH, ['getAll' => $this->action->getAll(), 'getCensoreMessages' => $getCensoreMessages]);
         return  System::template(static::INCLUDE_PATH, [], $this);
     }
 }

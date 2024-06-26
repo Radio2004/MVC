@@ -16,16 +16,14 @@ class Command
         }
     }
 
-    public function getConsoleCommand(): void
-    {
-        $result = shell_exec($this->consoleCommand);
-        echo $result;
-    }
-
     public function render(): void {
-//        $this->setConsoleCommand($_POST['command']);
-//        $this->getConsoleCommand();
-        $output = shell_exec('php Controller/Command/Procces.php censorship:filter');
+        $this->setConsoleCommand($_POST['command']);
+        $output = null;
+        if (preg_match('/^\w+:\w+$/m', $this->consoleCommand)) {
+            $output = shell_exec('php Core/ConsoleRun.php ' . $this->consoleCommand);
+        } else {
+            $output = shell_exec($this->consoleCommand);
+        }
         echo $output;
     }
 }
