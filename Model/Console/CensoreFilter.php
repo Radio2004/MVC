@@ -30,7 +30,7 @@ class CensoreFilter extends \Symfony\Component\Console\Command\Command
 
                 $re = "/($cenName)\b/mi";
 
-                $strMessage = $message['message'];
+                $strMessage = $message['message'] . ' ' . $message['title'];
 
                 $messageId = $message['id'];
 

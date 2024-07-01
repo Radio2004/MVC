@@ -43,7 +43,9 @@ class AddMessage extends CoreController {
         self::checkSetMessage();
         // Set Content
         $this->content = System::template(static::CONTENT_PATH, ['validateErrors' => self::getValidateErrors(), 'fields' => self::getFields()]);
-        return System::template(static::INCLUDE_PATH, [], $this);
+        // basic Params (title, content, etc)
+        $basicParams = $this->basicParams();
+        return System::template(static::INCLUDE_PATH, ['basicParams' => $basicParams]);
     }
 
 }

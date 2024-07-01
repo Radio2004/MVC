@@ -7,7 +7,7 @@ use Core\Language;
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?=$controller->getTitle()?></title>
+    <title><?=$basicParams['title']?></title>
     <link rel="stylesheet" href="<?=BASE_URL?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=BASE_URL?>assets/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -57,12 +57,12 @@ use Core\Language;
             <li class="nav-item">
                 <a class="nav-link" href="<?=BASE_URL?>"><?= Language::__('Home')?></a>
             </li>
-            <?php if ($controller->getBoolRole([1,3])): ?>
+            <?php if ($basicParams['adminUser']): ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?=BASE_URL?>messages/add"><?= Language::__('Add')?></a>
             </li>
             <?php endif ?>
-            <?php if ($controller->getBoolRole([1])): ?>
+            <?php if ($basicParams['admin']): ?>
             <li>
                 <a class="nav-link" href="<?=BASE_URL?>censorship"><?= Language::__('Censorship') ?></a>
             </li>
@@ -79,9 +79,9 @@ use Core\Language;
 <div class="site-content">
     <div class="container">
         <main>
-            <h1><?=$controller->getTitle()?></h1>
+            <h1><?=$basicParams['title']?></h1>
             <hr>
-            <?=$controller->getContent()?>
+            <?=$basicParams['content']?>
         </main>
     </div>
 </div>

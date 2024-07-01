@@ -5,7 +5,6 @@ namespace Controller\Messages;
 
 // Include Classes
 use core\CoreController;
-use core\DbConnect;
 use Core\Language;
 use Core\System;
 use Model\Messages;
@@ -15,6 +14,7 @@ use Model\Messages;
 class MessageIndex extends CoreController
 {
     protected const CONTENT_PATH = "view/messages/v_index.php";
+
     protected const INCLUDE_PATH = "view/base/v_con1col.php";
 
     protected string $title;
@@ -36,13 +36,16 @@ class MessageIndex extends CoreController
         // Set Title
         $this->title = Language::__('Chat List');
         // Get Messages
-        $messages = Messages::getMessages(DbConnect::getConnect());
+        $instanceMessages = new Messages();
+        $messages = $instanceMessages->getMessages();
         // Check Is Added Messages
         $this->isAddedMessage();
         // Get bool role result, what allow Admin and Manager Edit/Delete Messages
         $boolResult = $this->getBoolRole([1,2]);
         // Content
         $this->content = System::template(static::CONTENT_PATH, ['successText' => $this->successText, 'messages' => $messages, 'boolResult' => $boolResult]);
-        return System::template(static::INCLUDE_PATH, [], $this);
+        // basic Params (title, content, etc)
+        $basicParams = $this->basicParams();
+        return System::template(static::INCLUDE_PATH, ['basicParams' => $basicParams]);
     }
 }

@@ -11,7 +11,7 @@ class DbConnect
     private const DB_PASS = '';
     private static $connect;
 
-    static function init() {
+    static function init(): void {
         self::$connect = mysqli_connect(self::DB_HOST, self::DB_USER, self::DB_PASS, self::DB_DATABASE_NAME) or die('Mysql connection error: ' . mysqli_error());
     }
 

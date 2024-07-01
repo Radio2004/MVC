@@ -13,6 +13,7 @@
         "twig/twig": "^3.8",
       "ext-mysqli": "*",
         "symfony/process": "^6.4",
-        "symfony/console": "^6.4"
+        "symfony/console": "^6.4",
+      "ext-couchbase": "*"
     }
 }

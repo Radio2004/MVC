@@ -54,6 +54,8 @@ class DeleteMessage extends CoreController {
         $this->title = Language::__('Delete');
         // Set Content
         $this->content = System::template(self::CONTENT_PATH, []);
-        return System::template(static::INCLUDE_PATH, [], $this);
+        // basic Params (title, content, etc)
+        $basicParams = $this->basicParams();
+        return System::template(static::INCLUDE_PATH, ['basicParams' => $basicParams]);
     }
 }

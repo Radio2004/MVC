@@ -7,9 +7,11 @@
       <sourceFolder url="file://$MODULE_DIR$/Controller/Errors" isTestSource="false" packagePrefix="Controller" />
       <sourceFolder url="file://$MODULE_DIR$/Controller/Messages" isTestSource="false" packagePrefix="Controller" />
       <sourceFolder url="file://$MODULE_DIR$/bin" isTestSource="false" packagePrefix="bin\" />
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="Mvc\Project\" />
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="Mvc\Project\" />
       <sourceFolder url="file://$MODULE_DIR$/Model/Console" isTestSource="false" packagePrefix="Model\Console\" />
+      <sourceFolder url="file://$MODULE_DIR$/Model/Console" isTestSource="false" packagePrefix="Model\Console\" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="Mvc\Project\" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="Mvc\Project\" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="Mvc\Project\" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="Mvc\Project\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/container" />

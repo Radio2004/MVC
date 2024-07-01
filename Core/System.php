@@ -16,6 +16,13 @@ namespace Core;
 
 class System
 {
+    public $connect;
+
+    public function __construct()
+    {
+        $this->connect = DbConnect::getConnect();
+    }
+
    public static function parseUrl(string $url, array $routes) : array{
         $result = [
             'controller' => 'Errors/Error404',
@@ -35,7 +42,7 @@ class System
 
                 $params = (array)$route->params;
 
-                if(isset($params)){
+                if(count($params) > 0){
                     foreach($params as $name => $num){
                         $result['params'][$name] = $matches[$num];
                     }
@@ -64,15 +71,20 @@ class System
         return $word;
     }
 
-   public static function template(string $path, array $params, $controller = 0): string {
-        $html = '';
+   public static function template(string $path, array $params): string {
         ob_start();
 
         extract($params);
 
         include($path);
 
-        $html = ob_get_clean();
-        return $html;
+       return ob_get_clean();
+    }
+
+    public function basicProtection($elem): string
+    {
+        $elem = htmlspecialchars($elem);
+
+        return mysqli_real_escape_string($this->connect, $elem);
     }
 }

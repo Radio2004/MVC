@@ -5,7 +5,7 @@ namespace Controller\Censorship;
 use Core\CoreController;
 use Core\System;
 use Core\Language;
-use Model\CensoreAction;
+use Model\CensorAction;
 
 class EditCensorship extends CoreController
 {
@@ -40,7 +40,7 @@ class EditCensorship extends CoreController
     public function render(array $params) : string {
         $id = $params['mid'] ?? 0;
 
-        $this->action = new CensoreAction($id);
+        $this->action = new CensorAction($id);
 
         self::checkMessageExistence();
 
@@ -51,6 +51,8 @@ class EditCensorship extends CoreController
         $this->title = Language::__('Edit');
 
         $this->content = System::template(static::CONTENT_PATH, ['getData' => $getData]);
-        return System::template(static::INCLUDE_PATH, [], $this);
+        // basic Params (title, content, etc)
+        $basicParams = $this->basicParams();
+        return System::template(static::INCLUDE_PATH, ['basicParams' => $basicParams]);
     }
 }

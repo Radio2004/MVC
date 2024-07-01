@@ -3,7 +3,6 @@
 namespace Controller\Register;
 
 use Core\CoreController;
-use Core\DbConnect;
 use Core\Language;
 use Core\System;
 use Model\Users;
@@ -32,7 +31,8 @@ class Register extends CoreController {
     public function registerUser() : void
     {
         if (isset($_POST['register_submit'])) {
-            Users::registerUser($this->name, $this->password, $this->email, DbConnect::getConnect());
+            $instanceUsers = new Users();
+            $instanceUsers->registerUser($this->name, $this->password, $this->email);
             header('Location: ' . HOST . BASE_URL);
             exit;
         }
@@ -52,6 +52,8 @@ class Register extends CoreController {
         self::registerUser();
         // Set Content
         $this->content = System::template(static::CONTENT_PATH, []);
-        return System::template(static::INCLUDE_PATH, [], $this);
+        // basic Params (title, content, etc)
+        $basicParams = $this->basicParams();
+        return System::template(static::INCLUDE_PATH, ['basicParams' => $basicParams]);
     }
 }

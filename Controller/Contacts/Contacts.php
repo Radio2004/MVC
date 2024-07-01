@@ -19,6 +19,8 @@ class Contacts extends CoreController {
     public function render(array $params) : string {
         $this->title = Language::__("Contacts");
         $this->content = System::template(static::CONTENT_PATH, []);
-        return System::template(static::INCLUDE_PATH, [], $this);
+        // basic Params (title, content, etc)
+        $basicParams = $this->basicParams();
+        return System::template(static::INCLUDE_PATH, ['basicParams' => $basicParams]);
     }
 }

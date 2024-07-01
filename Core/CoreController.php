@@ -11,14 +11,6 @@ abstract class CoreController {
     // 1 = Admin 2 = Manager 3 = User
     protected array $role;
 
-    public function getTitle() : string {
-        return $this->title;
-    }
-
-    public function getContent() : string {
-        return $this->content;
-    }
-
     public function checkRole() : void {
         if (!isset($_SESSION['user_role']) || !in_array($_SESSION['user_role'], $this->role)) {
             header('Location: ' . HOST . BASE_URL . 'error');
@@ -32,6 +24,16 @@ abstract class CoreController {
         }
 
         return false;
+    }
+
+    protected function basicParams(): array
+    {
+        return [
+            'title' => $this->title,
+            'content' => $this->content,
+            'adminUser' => $this->getBoolRole([1,3]),
+            'admin' => $this->getBoolRole([1])
+        ];
     }
 
     abstract public function render(array $params) : string;

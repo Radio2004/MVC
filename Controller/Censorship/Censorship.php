@@ -8,7 +8,7 @@ namespace Controller\Censorship;
 use Core\CoreController;
 use Core\Language;
 use Core\System;
-use Model\CensoreAction;
+use Model\CensorAction;
 
 class Censorship extends CoreController
 {
@@ -23,7 +23,7 @@ class Censorship extends CoreController
 
     protected $action;
 
-    public function addCensore(): void
+    protected function addCensore(): void
     {
         if (isset($_POST['action']) && $_POST['action'] == 'addcensore') {
             $this->action->add($_POST['new-censor']);
@@ -32,7 +32,7 @@ class Censorship extends CoreController
         }
     }
 
-    public function deleteCensore(): void
+    protected function deleteCensore(): void
     {
         if (isset($_POST['action']) && $_POST['action'] == 'deletecensore') {
             $this->action->delete($_POST['id']);
@@ -44,15 +44,17 @@ class Censorship extends CoreController
     public function render(array $params) : string {
         $this->title = Language::__("Censorship");
 
-        $this->action = new CensoreAction();
+        $this->action = new CensorAction();
 
-        self::addCensore();
+        $this->addCensore();
 
-        self::deleteCensore();
+        $this->deleteCensore();
 
         $getCensoreMessages = $this->action->getCensoreMessages();
 
         $this->content = System::template(static::CONTENT_PATH, ['getAll' => $this->action->getAll(), 'getCensoreMessages' => $getCensoreMessages]);
-        return  System::template(static::INCLUDE_PATH, [], $this);
+        // basic Params (title, content, etc)
+        $basicParams = $this->basicParams();
+        return System::template(static::INCLUDE_PATH, ['basicParams' => $basicParams]);
     }
 }

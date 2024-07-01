@@ -23,7 +23,7 @@ class EditMessage extends CoreController
 
     public function getCheckIsExist(): array
     {
-        return Messages::isAlreadyExist($this->idMessageFromLink, DbConnect::getConnect(), 'message');
+        return Messages::isAlreadyExist($this->idMessageFromLink, DbConnect::getConnect());
     }
 
     public function checkMessageExistence(): void
@@ -59,6 +59,8 @@ class EditMessage extends CoreController
         $this->title = Language::__('Edit');
         // Set Content
         $this->content = System::template(static::CONTENT_PATH, ['checkIsExist' => self::getCheckIsExist()]);
-        return System::template(static::INCLUDE_PATH, [], $this);
+        // basic Params (title, content, etc)
+        $basicParams = $this->basicParams();
+        return System::template(static::INCLUDE_PATH, ['basicParams' => $basicParams]);
     }
 }
