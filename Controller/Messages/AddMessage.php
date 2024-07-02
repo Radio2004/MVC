@@ -4,21 +4,25 @@ namespace Controller\Messages;
 
 use Core\ArrFields;
 use core\CoreController;
-use core\DbConnect;
 use Core\Language;
 use Core\System;
 use Model\Messages;
 
 class AddMessage extends CoreController {
     protected const CONTENT_PATH = "view/messages/v_add.php";
+
     protected const INCLUDE_PATH = "view/base/v_con1col.php";
+
     protected string $title;
+
     protected string $content;
     private array $neededFieldsArray = ['title', 'message'];
+    protected object $instanceMessage;
+
     public function checkSetMessage() : void
     {
         if(empty(self::getValidateErrors()) and count($_POST)) {
-            $result = Messages::setMessage(DbConnect::getConnect(), self::getFields());
+            $result = $this->instanceMessage->setMessage(self::getFields());
             $_SESSION['is_message_added'] = $result;
             header('Location: ' . HOST . BASE_URL);
             exit;
@@ -40,6 +44,7 @@ class AddMessage extends CoreController {
         // Set Title
         $this->title = Language::__('Add message');
         /**  validate */
+        $this->instanceMessage = new Messages();
         self::checkSetMessage();
         // Set Content
         $this->content = System::template(static::CONTENT_PATH, ['validateErrors' => self::getValidateErrors(), 'fields' => self::getFields()]);

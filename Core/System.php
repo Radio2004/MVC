@@ -83,7 +83,8 @@ class System
 
     public function basicProtection($elem): string
     {
-        $elem = htmlspecialchars($elem);
+
+        $elem = htmlspecialchars((string)$elem, ENT_QUOTES);
 
         return mysqli_real_escape_string($this->connect, $elem);
     }

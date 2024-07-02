@@ -233,6 +233,7 @@ ul>li {
 	box-shadow: 0 0 11px 0;
 	padding: 10px;
 	gap: 1rem;
+	justify-content: space-between;
 }
 
 .censorship-word {

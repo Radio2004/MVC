@@ -9,7 +9,7 @@ use Model\CensorAction;
 
 class EditCensorship extends CoreController
 {
-    protected const CONTENT_PATH = "view/edit/v_index.php";
+    protected const CONTENT_PATH = "view/editCensor/v_index.php";
 
     protected const INCLUDE_PATH = "view/base/v_con1col.php";
 
@@ -21,7 +21,7 @@ class EditCensorship extends CoreController
     protected $action;
 
     public function changeMessage() : void {
-        if (isset($_POST['yes-edit'])) {
+        if (isset($_POST['yes-editCensor'])) {
             $this->action->edit($_POST);
             header('Location: ' . HOST . BASE_URL . 'censorship');
             exit;
@@ -42,9 +42,9 @@ class EditCensorship extends CoreController
 
         $this->action = new CensorAction($id);
 
-        self::checkMessageExistence();
+        $this->checkMessageExistence();
 
-        self::changeMessage();
+        $this->changeMessage();
 
         $getData = $this->action->isAlreadyExist();
 

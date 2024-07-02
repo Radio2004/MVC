@@ -25,7 +25,7 @@ class CensorAction implements ContainerCensoreAction
     }
     public function getAll(): array {
 
-        $queryString = $this->instanceSys->basicProtection("SELECT * FROM Censorship");
+        $queryString = "SELECT * FROM Censorship";
 
         return mysqli_fetch_all(mysqli_query($this->connect, $queryString),MYSQLI_ASSOC);
     }
@@ -33,7 +33,7 @@ class CensorAction implements ContainerCensoreAction
     public function getCensoreMessages(): array
     {
 
-        $queryString = $this->instanceSys->basicProtection("SELECT * FROM censorship_messages");
+        $queryString = "SELECT * FROM censorship_messages";
 
         return mysqli_fetch_all(mysqli_query($this->connect, $queryString),MYSQLI_ASSOC);
     }
@@ -43,7 +43,9 @@ class CensorAction implements ContainerCensoreAction
         $validateWord = System::validateInput($word) or die('Error');
 
         // Check If Login Already Exists
-        $query = $this->instanceSys->basicProtection("SELECT * FROM Censorship WHERE censorship_word = '$validateWord'");
+        $query = sprintf("SELECT * FROM Censorship WHERE censorship_word = '%s'",
+            $this->instanceSys->basicProtection($validateWord)
+        );
 
         // Get Result
         $result = mysqli_query($this->connect, $query);
@@ -60,9 +62,12 @@ class CensorAction implements ContainerCensoreAction
 
     public function edit($post): bool {
 
-        $postWord = mysqli_real_escape_string($this->connect, $post['Censorship_word']);
+        $postWord = $this->instanceSys->basicProtection($post['Censorship_word']);
 
-        $queryChange = $this->instanceSys->basicProtection("UPDATE Censorship SET Censorship_word = '$postWord' WHERE censorship_id = '$this->idMessageFromLink'");
+        $queryChange = sprintf("UPDATE Censorship SET Censorship_word = '%s' WHERE censorship_id = '%s'",
+            $postWord,
+            $this->instanceSys->basicProtection($this->idMessageFromLink)
+        );
 
         mysqli_query($this->connect, $queryChange);
 
@@ -71,9 +76,9 @@ class CensorAction implements ContainerCensoreAction
 
     public function delete($id): bool {
 
-        $sqlInjection = mysqli_real_escape_string($this->connect, $id);
-
-        $queryDelete = $this->instanceSys->basicProtection("DELETE FROM Censorship WHERE censorship_id = '$sqlInjection'");
+        $queryDelete = sprintf("DELETE FROM Censorship WHERE censorship_id = '%s'",
+            $this->instanceSys->basicProtection($id)
+        );
 
         $queryDeleteResult = mysqli_query($this->connect, $queryDelete);
 
@@ -82,7 +87,9 @@ class CensorAction implements ContainerCensoreAction
 
     public function isAlreadyExist() : array {
 
-        $queryString = $this->instanceSys->basicProtection("SELECT Censorship_word FROM Censorship WHERE censorship_id = '$this->idMessageFromLink'");
+        $queryString = sprintf("SELECT Censorship_word FROM Censorship WHERE censorship_id = '%s'",
+            $this->instanceSys->basicProtection($this->idMessageFromLink)
+        );
         $result_arr = mysqli_fetch_array(mysqli_query($this->connect, $queryString),MYSQLI_ASSOC);
 
         return $result_arr ?? [];

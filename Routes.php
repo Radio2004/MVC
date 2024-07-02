@@ -38,8 +38,8 @@ return (function(){
             'controller' => 'Censorship/Censorship'
         ],
         [
-            //message/n/edit
-            'regex' => "/^message\/($intGT0)\/edit\/?$/",
+            //message/n/editCensor
+            'regex' => "/^message\/($intGT0)\/editCensor\/?$/",
             'controller' => 'message/EditMessage',
             'params' => ['mid' => 1]
         ],

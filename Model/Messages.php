@@ -25,25 +25,32 @@ class Messages
     }
 
     public function getMessages() : array {
-        $queryString = $this->instanceSys->basicProtection("SELECT * FROM messages WHERE visible = 1");
+        $queryString = "SELECT * FROM messages WHERE visible = 1";
         $result_arr = mysqli_fetch_all(mysqli_query($this->connect, $queryString),MYSQLI_ASSOC);
         return $result_arr ?? [];
     }
 
     public function getAllMessages() : array {
-        $queryString = $this->instanceSys->basicProtection("SELECT * FROM messages");
+        $queryString = "SELECT * FROM messages";
         $result_arr = mysqli_fetch_all(mysqli_query($this->connect, $queryString),MYSQLI_ASSOC);
         return $result_arr ?? [];
     }
 
     public function getMessage($id) : array {
-        $queryString = $this->instanceSys->basicProtection(sprintf("SELECT * FROM messages WHERE id = %s", $id));
+        $queryString = sprintf("SELECT * FROM messages WHERE id = %s",
+            $this->instanceSys->basicProtection($id)
+        );
         $result_arr = mysqli_fetch_array(mysqli_query($this->connect, $queryString), MYSQLI_ASSOC);
         return $result_arr ?? [];
     }
 
     public function setMessage($fields) : bool {
-        $queryString = $this->instanceSys->basicProtection(sprintf("INSERT into messages VALUES (null, '%s', '%s', '%s', now(), '0', '%s', '1', NULL)", $_SESSION['user_login'], $fields['title'], $fields['message'], $_SESSION['user_id']));
+        $queryString = sprintf("INSERT into messages VALUES (null, '%s', '%s', '%s', now(), '0', '%s', '1', NULL)",
+            $this->instanceSys->basicProtection($_SESSION['user_login']),
+            $this->instanceSys->basicProtection($fields['title']),
+            $this->instanceSys->basicProtection($fields['message']),
+            $this->instanceSys->basicProtection($_SESSION['user_id'])
+        );
         $result = mysqli_query($this->connect, $queryString) or die(mysqli_error($this->connect));
         return is_bool($result)? $result : false;
     }
@@ -67,7 +74,9 @@ class Messages
     }
 
     public function deleteMessage(int $idMessageFromLink) : void {
-        $queryDelete = $this->instanceSys->basicProtection("UPDATE messages SET visible = '0' WHERE id = '$idMessageFromLink'");
+        $queryDelete = sprintf("UPDATE messages SET visible = '0' WHERE id = '%s'",
+            $this->instanceSys->basicProtection($idMessageFromLink)
+        );
 
         mysqli_query($this->connect, $queryDelete);
     }
@@ -77,14 +86,20 @@ class Messages
         $postTitle = $post["message-title"];
         $postContent = $post["message-content"];
 
-        $queryChange = $this->instanceSys->basicProtection("UPDATE messages SET title = '$postTitle', message = '$postContent' WHERE id = '$id'");
+        $queryChange = sprintf("UPDATE messages SET title = '%s', message = '%s' WHERE id = '%s'",
+            $this->instanceSys->basicProtection($postTitle),
+            $this->instanceSys->basicProtection($postContent),
+            $this->instanceSys->basicProtection($id)
+        );
 
         mysqli_query($this->connect, $queryChange);
     }
 
     public function isAlreadyExist(int $idMessage) : array {
         // Get ID, Title, Message From Message
-        $getTitleMessage = $this->instanceSys->basicProtection("SELECT id, title, message FROM messages WHERE id = '$idMessage'");
+        $getTitleMessage = sprintf("SELECT id, title, message FROM messages WHERE id = '%s'",
+            $this->instanceSys->basicProtection($idMessage)
+        );
 
         $resultIsAlreadyExist = mysqli_query($this->connect, $getTitleMessage);
 

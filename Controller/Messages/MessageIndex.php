@@ -22,6 +22,8 @@ class MessageIndex extends CoreController
     protected string $content;
     private bool $successText = false;
 
+    protected object $instanceMessage;
+
 
     public function isAddedMessage() : void
     {
@@ -36,8 +38,8 @@ class MessageIndex extends CoreController
         // Set Title
         $this->title = Language::__('Chat List');
         // Get Messages
-        $instanceMessages = new Messages();
-        $messages = $instanceMessages->getMessages();
+        $this->instanceMessage = new Messages();
+        $messages = $this->instanceMessage->getMessages();
         // Check Is Added Messages
         $this->isAddedMessage();
         // Get bool role result, what allow Admin and Manager Edit/Delete Messages

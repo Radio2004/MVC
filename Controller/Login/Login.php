@@ -3,7 +3,6 @@
 namespace Controller\Login;
 
 use Core\CoreController;
-use Core\DbConnect;
 use Core\Language;
 use Core\System;
 use Model\Users;
@@ -18,6 +17,8 @@ class Login extends CoreController {
     private string $name;
     private string $password;
 
+    protected object $instanceUser;
+
     public function exit() : void {
         if (isset($_GET['login-exit'])) {
             Users::logout();
@@ -28,7 +29,7 @@ class Login extends CoreController {
 
     public function submit() : void {
         if (isset($_POST['login_submit'])) {
-            Users::loginUser($this->name, $this->password, DbConnect::getConnect());
+            $this->instanceUser->loginUser($this->name, $this->password);
             header('Location: ' . HOST . BASE_URL);
             exit;
         }
@@ -40,10 +41,12 @@ class Login extends CoreController {
         $this->password = $_POST['login_password'] ?? '';
         // Set Title
         $this->title = Language::__('Login');
+        // Create Instance User
+        $this->instanceUser = new Users();
         // Exit from Account
-        self::exit();
+        $this->exit();
         // Login to Account
-        self::submit();
+        $this->submit();
         // Set Content 
         $this->content = System::template(static::CONTENT_PATH, []);
         // basic Params (title, content, etc)

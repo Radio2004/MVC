@@ -1,5 +1,6 @@
 <div class="contacts">
     <div class="wrapper-contacts">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d1539.072786228804!2d25.59711294147545!3d49.55244559963745!3m2!1i1024!2i768!4f13.1!5e0!3m2!1suk!2sua!4v1719946246897!5m2!1suk!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <ul class="list-contacts">
             <li class="item-contacts">
                 <span class="icon-contacts">

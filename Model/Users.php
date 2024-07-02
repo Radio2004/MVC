@@ -7,7 +7,7 @@ use Core\System;
 
 class Users
 {
-    protected object $connect;
+    protected $connect;
 
     public function __construct()
     {
@@ -27,6 +27,7 @@ class Users
 
         // Check If Login Already Exists
         $query = $instanceSys->basicProtection("SELECT * FROM users WHERE login = '$registerName'");
+
 
         // Get Result
         $result = mysqli_query($this->connect, $query);
@@ -59,7 +60,11 @@ class Users
         // Searching For a User by Username
         $instanceSys = new System();
 
-        $queryLogin = $instanceSys->basicProtection("SELECT * FROM users WHERE login = '$loginName'");
+        $queryLogin = sprintf("SELECT * FROM users WHERE login = '%s'",
+            $instanceSys->basicProtection($loginName)
+        );
+
+        var_dump($queryLogin);
 
         $resultLogin = mysqli_query($this->connect, $queryLogin);
 

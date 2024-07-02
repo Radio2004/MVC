@@ -2,8 +2,6 @@
 
 namespace Controller\Message;
 
-use Core\DbConnect;
-
 use Core\CoreController;
 use Core\Language;
 use Core\System;
@@ -17,8 +15,10 @@ class DeleteMessage extends CoreController {
     protected array $role = [1,2];
     private int $idMessageFromLink;
 
+    protected object $instanceMessage;
+
     public function getCheckIsExist(): array {
-        return Messages::isAlreadyExist($this->idMessageFromLink, DbConnect::getConnect());
+        return $this->instanceMessage->isAlreadyExist($this->idMessageFromLink);
     }
 
     public function checkMessageExistence(): void
@@ -31,7 +31,7 @@ class DeleteMessage extends CoreController {
 
     public function deleteMessage() : void {
         if (isset($_POST['yes-delete'])) {
-            Messages::deleteMessage($this->getCheckIsExist()['id'], DbConnect::getConnect());
+            $this->instanceMessage->deleteMessage($this->getCheckIsExist()['id']);
             header('Location: ' . HOST . BASE_URL);
             exit;
         }
@@ -42,9 +42,10 @@ class DeleteMessage extends CoreController {
         // $this->idMessageFromLink = (int)explode('/', $_SERVER['REDIRECT_URL'])[2];
         $this->idMessageFromLink = $params['mid'];
         // Check id message is in database
+        $this->instanceMessage = new Messages();
         self::checkMessageExistence();
         // Get message
-        $message = Messages::getMessage(DbConnect::getConnect(), $this->idMessageFromLink);
+        $message = $this->instanceMessage->getMessage($this->idMessageFromLink);
         if ($message['user_id'] == $_SESSION['user_id']) $this->role[] = 3;
         // If delete was confirmed
         self::deleteMessage();

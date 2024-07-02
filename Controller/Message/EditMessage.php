@@ -3,7 +3,6 @@
 namespace Controller\Message;
 
 use Core\CoreController;
-use Core\DbConnect;
 use Core\Language;
 use Core\System;
 use Model\Messages;
@@ -21,9 +20,11 @@ class EditMessage extends CoreController
 
     private int $idMessageFromLink;
 
+    protected object $instanceMessage;
+
     public function getCheckIsExist(): array
     {
-        return Messages::isAlreadyExist($this->idMessageFromLink, DbConnect::getConnect());
+        return $this->instanceMessage->isAlreadyExist($this->idMessageFromLink);
     }
 
     public function checkMessageExistence(): void
@@ -35,8 +36,8 @@ class EditMessage extends CoreController
     }
 
     public function changeMessage() : void {
-        if (isset($_POST['yes-edit'])) {
-            Messages::changeMessage($_POST, self::getCheckIsExist()['id'],  DbConnect::getConnect());
+        if (isset($_POST['yes-editCensor'])) {
+            $this->instanceMessage->changeMessage($_POST, self::getCheckIsExist()['id']);
             header('Location: ' . HOST . BASE_URL);
             exit;
         }
@@ -47,9 +48,11 @@ class EditMessage extends CoreController
         // explode('/', $_SERVER['REDIRECT_URL'][2] = ID MESSAGE FROM LINK
         // $this->idMessageFromLink = (int)explode('/', $_SERVER['REDIRECT_URL'])[2];
         $this->idMessageFromLink = $params['mid'];
+        // Create Instance Message
+        $this->instanceMessage = new Messages();
         // Check ID Message is in Database
         self::checkMessageExistence();
-        $message = Messages::getMessage(DbConnect::getConnect(), $this->idMessageFromLink);
+        $message = $this->instanceMessage->getMessage($this->idMessageFromLink);
         if ($message['user_id'] == $_SESSION['user_id']) $this->role[] = 3;
         // If role isn't Admin or Manager then link to Error404
         self::checkRole();
